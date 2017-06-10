@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 import static android.R.attr.name;
@@ -82,9 +83,10 @@ public class MainActivity extends AppCompatActivity {
     public void buttonOnClick(View view) {
         int the_id = view.getId();
         if (the_id == R.id.b_1) {
-            Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();
 
+            Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();
             // Define a time value of 5 seconds
+
             Long alertTime = null;
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 //This is getting current time and adding 10 seconds to set alarm trigger time
@@ -118,7 +120,18 @@ public class MainActivity extends AppCompatActivity {
                             PendingIntent.FLAG_UPDATE_CURRENT));
 
         }
-        if (the_id == R.id.b_2) {Toast.makeText(this, "but_2_works", Toast.LENGTH_SHORT).show();
+        if (the_id == R.id.b_2) {
+            Toast.makeText(this, "but_2_works", Toast.LENGTH_SHORT).show();
+            AlarmManager my_alarm_manager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            Long NexClockTime = my_alarm_manager.getNextAlarmClock().getTriggerTime();
+            Long now = System.currentTimeMillis();
+            Long timeLeft = NexClockTime - now;
+
+
+            //Toast.makeText(this, "Time remaining = "+timeLeft, Toast.LENGTH_SHORT).show();
+            Button b_1_x = (Button)findViewById(R.id.b_1);
+            //b_1_x.setText("Time = "+timeLeft);
+            b_1_x.setText("Time");
         }
         //if (the_id == R.id.b_3) {Toast.makeText(this, "but_3_works", Toast.LENGTH_SHORT).show();
        // }
